@@ -13,6 +13,12 @@
   --font-serif: var(--font-serif);
 }
 
+/* Projeyle paketlenen yazı tipleri (@fontsource-variable) */
+:root {
+  --font-sans: "Inter Variable", system-ui, sans-serif;
+  --font-serif: "Lora Variable", Georgia, serif;
+}
+
 html {
   -webkit-tap-highlight-color: transparent;
 }
@@ -20,11 +26,11 @@ html {
 body {
   background: var(--color-krem);
   color: var(--color-koyu);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-sans);
 }
 
 .font-serif {
-  font-family: var(--font-serif), Georgia, serif;
+  font-family: var(--font-serif);
 }
 
 .sepia-photo {
