@@ -20,11 +20,11 @@ export function TaziyeDefteri({ ilk }: { ilk: Mesaj[] }) {
   };
 
   return (
-    <section className="mt-6 px-4">
+    <section className="mt-12 px-4">
       <h2 className="mb-2 font-serif text-lg font-bold text-toprak">Taziye Defteri ({mesajlar.length})</h2>
 
       {kullanici ? (
-        <div className="mb-3 rounded-2xl bg-white p-3">
+        <div className="mb-3 rounded-3xl bg-white p-3">
           <div className="mb-2 flex flex-wrap gap-1.5">
             {["Allah rahmet eylesin.", "Mekânı cennet olsun.", "Başımız sağ olsun."].map((h) => (
               <button key={h} onClick={() => setMetin(h)} className="rounded-full bg-kum px-2.5 py-1 text-xs">
@@ -44,18 +44,18 @@ export function TaziyeDefteri({ ilk }: { ilk: Mesaj[] }) {
           </button>
         </div>
       ) : (
-        <div className="mb-3 rounded-2xl bg-kum p-3 text-center text-sm">
+        <div className="mb-3 rounded-3xl bg-kum p-3 text-center text-sm">
           Taziye mesajı bırakmak için <Link href="/giris" className="font-semibold text-altin">üye girişi</Link> yapın.
         </div>
       )}
 
-      <ul className="space-y-2">
+      <ul className="space-y-3">
         {[...mesajlar].reverse().map((m, i) => (
-          <li key={i} className="flex gap-3 rounded-2xl bg-white p-3">
+          <li key={i} className="flex gap-3 rounded-3xl bg-white p-3">
             <Avatar name={m.yazan} size="sm" />
             <div className="min-w-0">
               <div className="text-sm font-semibold">
-                {rol === "ziyaretci" ? maskName(m.yazan) : m.yazan} <span className="font-normal text-toprak/50">· {formatDate(m.tarih, { day: "numeric", month: "short" })}</span>
+                {rol === "ziyaretci" ? maskName(m.yazan) : m.yazan} <span className="font-normal text-toprak/80">· {formatDate(m.tarih, { day: "numeric", month: "short" })}</span>
               </div>
               <p className="text-[15px] text-toprak/85">{m.mesaj}</p>
             </div>

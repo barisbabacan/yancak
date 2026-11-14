@@ -24,17 +24,17 @@ function Icerik() {
   const u = kullanici!;
 
   return (
-    <div className="space-y-4 px-4">
+    <div className="space-y-6 px-4">
       <div className="flex items-center gap-4 rounded-3xl bg-white p-4">
         <Avatar name={u.adSoyad} size="lg" dark />
         <div>
           <div className="font-serif text-xl font-bold text-toprak">{u.adSoyad}</div>
-          <div className="text-sm text-toprak/65">{u.meslek}</div>
-          <div className="text-xs text-toprak/50">Üyelik: {formatDate(u.kayitTarihi)}</div>
+          <div className="text-sm text-toprak/80">{u.meslek}</div>
+          <div className="text-xs text-toprak/80">Üyelik: {formatDate(u.kayitTarihi)}</div>
         </div>
       </div>
 
-      <div className="divide-y divide-kum rounded-2xl bg-white">
+      <div className="divide-y divide-kum rounded-3xl bg-white">
         <Toggle
           icon={<Cake className="size-5 text-altin" />}
           baslik="Doğum günümde yaşım görünsün"
@@ -45,24 +45,24 @@ function Icerik() {
         <Toggle icon={<Bell className="size-5 text-altin" />} baslik="Yeni duyuru bildirimleri" aciklama="Telefonunuza bildirim gelir." deger={bildirim} onChange={setBildirim} />
       </div>
 
-      <div className="rounded-2xl bg-white p-4 text-sm">
+      <div className="rounded-3xl bg-white p-4 text-sm">
         <div className="mb-2 font-semibold text-toprak">Kayıtlı bilgilerim</div>
         <dl className="grid grid-cols-[110px_1fr] gap-y-1.5 text-toprak/80">
-          <dt className="text-toprak/55">E-posta</dt>
+          <dt className="text-toprak/80">E-posta</dt>
           <dd>{u.eposta}</dd>
-          <dt className="text-toprak/55">Telefon</dt>
+          <dt className="text-toprak/80">Telefon</dt>
           <dd>{u.telefon}</dd>
-          <dt className="text-toprak/55">Doğum tarihi</dt>
+          <dt className="text-toprak/80">Doğum tarihi</dt>
           <dd>{formatDate(u.dogumTarihi)}</dd>
-          <dt className="text-toprak/55">Adres</dt>
+          <dt className="text-toprak/80">Adres</dt>
           <dd>{u.adres}</dd>
-          <dt className="text-toprak/55">Cinsiyet</dt>
+          <dt className="text-toprak/80">Cinsiyet</dt>
           <dd>{u.cinsiyet}</dd>
         </dl>
-        <p className="mt-3 text-xs text-toprak/50">Bilgilerinizde değişiklik için yönetimle iletişime geçin.</p>
+        <p className="mt-3 text-xs text-toprak/80">Bilgilerinizde değişiklik için yönetimle iletişime geçin.</p>
       </div>
 
-      <button onClick={() => setRol("ziyaretci")} className="flex w-full items-center justify-center gap-2 rounded-2xl bg-white py-3 text-sm font-semibold text-red-700">
+      <button onClick={() => setRol("ziyaretci")} className="flex w-full items-center justify-center gap-2 rounded-3xl bg-white py-3 text-sm font-semibold text-red-700">
         <LogOut className="size-4" /> Çıkış Yap
       </button>
     </div>
@@ -75,7 +75,7 @@ function Toggle({ icon, baslik, aciklama, deger, onChange }: { icon: React.React
       {icon}
       <span className="flex-1">
         <span className="block text-[15px] font-medium">{baslik}</span>
-        <span className="text-xs text-toprak/55">{aciklama}</span>
+        <span className="text-xs text-toprak/80">{aciklama}</span>
       </span>
       <span className={`relative h-7 w-12 shrink-0 rounded-full transition ${deger ? "bg-emerald-600" : "bg-stone-300"}`}>
         <span className={`absolute top-1 size-5 rounded-full bg-white shadow transition-all ${deger ? "left-6" : "left-1"}`} />

@@ -20,7 +20,7 @@ export default function IlanlarSayfasi() {
     <>
       <PageHeader title="İlan Panosu" subtitle="Satılık tarla, iş ilanı, kayıp-buluntu…" />
       <UyeKapisi>
-        <div className="no-scrollbar flex gap-2 overflow-x-auto px-4 py-2">
+        <div className="no-scrollbar flex gap-2 overflow-x-auto px-4 pt-1 pb-4">
           <Chip active={tur === "hepsi"} onClick={() => setTur("hepsi")}>
             Tümü
           </Chip>
@@ -30,17 +30,17 @@ export default function IlanlarSayfasi() {
             </Chip>
           ))}
         </div>
-        <div className="space-y-2.5 px-4 pt-1">
+        <div className="space-y-4 px-4 pt-2 md:grid md:grid-cols-2 md:gap-5 md:space-y-0 lg:grid-cols-3">
           {liste.map((i) => (
-            <div key={i.id} className="rounded-2xl bg-white p-3.5">
+            <div key={i.id} className="rounded-3xl bg-white p-3.5">
               <div className="flex items-center gap-2">
-                <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${RENK[i.tur]}`}>{i.tur}</span>
-                <span className="ml-auto text-xs text-toprak/50">{formatDate(i.tarih, { day: "numeric", month: "short" })}</span>
+                <span className={`rounded-full px-2 py-0.5 text-[12px] font-semibold ${RENK[i.tur]}`}>{i.tur}</span>
+                <span className="ml-auto text-xs text-toprak/80">{formatDate(i.tarih, { day: "numeric", month: "short" })}</span>
               </div>
               <div className="mt-1.5 font-semibold">{i.baslik}</div>
               <p className="text-sm text-toprak/75">{i.aciklama}</p>
               <div className="mt-2 flex items-center justify-between">
-                <div className="text-xs text-toprak/60">
+                <div className="text-xs text-toprak/80">
                   {i.veren}
                   {i.fiyat && <span className="ml-2 font-semibold text-toprak">{i.fiyat}</span>}
                 </div>
@@ -51,7 +51,7 @@ export default function IlanlarSayfasi() {
             </div>
           ))}
         </div>
-        <button className="fixed right-4 bottom-24 z-30 flex items-center gap-2 rounded-full bg-gunbatimi px-4 py-3 font-semibold text-white shadow-lg md:right-[calc(50%-20rem)]">
+        <button className="fixed right-4 bottom-28 z-30 flex items-center gap-2 rounded-full bg-gunbatimi px-4 py-3 font-semibold text-white shadow-lg lg:right-10 lg:bottom-10">
           <Plus className="size-5" /> İlan Ver
         </button>
       </UyeKapisi>

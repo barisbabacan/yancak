@@ -12,7 +12,7 @@ export default function GaleriSayfasi() {
   return (
     <>
       <PageHeader title="Fotoğraf Galerisi" subtitle="Etkinliklerimiz ve köyü ziyaret edenlerin objektifinden" />
-      <Link href="/arsiv" className="mx-4 mb-1 flex items-center gap-3 rounded-2xl bg-gradient-to-r from-toprak to-koyu p-3.5 text-krem">
+      <Link href="/arsiv" className="mx-4 mb-1 flex items-center gap-3 rounded-3xl bg-gradient-to-r from-toprak to-koyu p-3.5 text-krem">
         <Archive className="size-6 text-bugday" />
         <div className="flex-1">
           <div className="font-semibold">Eski Fotoğraf & Video Arşivi</div>

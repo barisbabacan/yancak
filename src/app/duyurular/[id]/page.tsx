@@ -23,12 +23,12 @@ export default async function DuyuruDetay({ params }: { params: Promise<{ id: st
       <div className="px-4">
         <div className="flex items-center gap-2">
           <KategoriEtiketi id={d.kategori} />
-          <span className="text-xs text-toprak/60">{formatDate(d.tarih)}</span>
+          <span className="text-xs text-toprak/80">{formatDate(d.tarih)}</span>
         </div>
         <h1 className="mt-2 font-serif text-2xl leading-tight font-bold text-toprak">{d.baslik}</h1>
 
         {d.etkinlikTarihi && (
-          <div className="mt-4 space-y-2 rounded-2xl bg-kum p-4 text-sm">
+          <div className="mt-4 space-y-2 rounded-3xl bg-kum p-4 text-sm">
             <div className="flex items-center gap-2">
               <CalendarDays className="size-4 text-altin" />
               {formatDate(d.etkinlikTarihi, { day: "numeric", month: "long", year: "numeric", weekday: "long" })}
@@ -42,9 +42,9 @@ export default async function DuyuruDetay({ params }: { params: Promise<{ id: st
           </div>
         )}
 
-        <div className="mt-4 space-y-3 text-[16px] leading-relaxed whitespace-pre-line">{d.icerik}</div>
+        <div className="mt-6 space-y-4 text-[17px] leading-relaxed whitespace-pre-line">{d.icerik}</div>
 
-        <div className="mt-6 flex justify-center">
+        <div className="mt-10 mb-6 flex justify-center">
           <WhatsAppPaylas text={`📢 ${d.baslik}\n${d.ozet}`} url={`https://yanicak.org.tr/duyurular/${d.id}`} />
         </div>
       </div>

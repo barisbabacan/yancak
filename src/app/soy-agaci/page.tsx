@@ -16,9 +16,9 @@ function Dugum({ d, kok }: { d: AileDugum; kok?: boolean }) {
       >
         <span className="flex-1">
           <span className="block text-[15px] font-semibold">{d.ad}</span>
-          {d.not && <span className={`text-xs ${kok ? "text-krem/70" : "text-toprak/55"}`}>{d.not}</span>}
+          {d.not && <span className={`text-xs ${kok ? "text-krem/70" : "text-toprak/80"}`}>{d.not}</span>}
         </span>
-        {cocukVar && <span className={`text-xs ${kok ? "text-krem/70" : "text-toprak/50"}`}>{acik ? "▾" : `▸ ${d.cocuklar!.length}`}</span>}
+        {cocukVar && <span className={`text-xs ${kok ? "text-krem/70" : "text-toprak/80"}`}>{acik ? "▾" : `▸ ${d.cocuklar!.length}`}</span>}
       </button>
       {cocukVar && acik && (
         <ul className="ml-2">
@@ -40,14 +40,14 @@ export default function SoyAgaciSayfasi() {
     <>
       <PageHeader title="Sülaleler & Soy Ağacı" subtitle="Hangi aile kimden geliyor?" />
       <UyeKapisi>
-        <div className="no-scrollbar flex gap-2 overflow-x-auto px-4 py-2">
+        <div className="no-scrollbar flex gap-2 overflow-x-auto px-4 pt-1 pb-4">
           {SULALELER.map((x) => (
             <Chip key={x.id} active={secili === x.id} onClick={() => setSecili(x.id)}>
               {x.ad}
             </Chip>
           ))}
         </div>
-        <div className="mx-4 mt-2 rounded-2xl bg-kum p-4">
+        <div className="mx-4 mt-2 rounded-3xl bg-kum p-4">
           <div className="font-serif text-xl font-bold text-toprak">{s.ad}</div>
           <div className="text-sm text-altin">Lakap: &ldquo;{s.lakap}&rdquo; · {uyeSayisi} kayıtlı üye</div>
           <p className="mt-1 text-sm text-toprak/75">{s.aciklama}</p>
@@ -55,10 +55,10 @@ export default function SoyAgaciSayfasi() {
         <ul className="mx-4 mt-3">
           <Dugum d={s.agac} kok />
         </ul>
-        <div className="mx-4 mt-4 rounded-2xl border border-dashed border-bugday p-4 text-center text-sm text-toprak/75">
+        <div className="mx-4 mt-4 rounded-3xl border border-dashed border-bugday p-4 text-center text-sm text-toprak/75">
           Eksik ya da yanlış bilgi mi var?
           <button className="mt-2 block w-full rounded-xl bg-toprak py-2.5 font-semibold text-krem">Düzeltme / Ekleme Öner</button>
-          <span className="mt-1 block text-xs text-toprak/50">Önerileriniz yönetim onayından sonra ağaca eklenir.</span>
+          <span className="mt-1 block text-xs text-toprak/80">Önerileriniz yönetim onayından sonra ağaca eklenir.</span>
         </div>
       </UyeKapisi>
     </>

@@ -23,13 +23,13 @@ export default async function VefatDetay({ params }: { params: Promise<{ id: str
         <div className="mt-3 text-xs text-stone-400">Vefat: {formatDate(v.tarih)}</div>
       </div>
 
-      <div className="mx-4 mt-4 divide-y divide-kum rounded-2xl bg-white text-sm">
+      <div className="mx-4 mt-8 divide-y divide-kum rounded-3xl bg-white text-sm">
         <Bilgi etiket="Cenaze" deger={v.cenaze} />
         {v.mevlit && <Bilgi etiket="Mevlit" deger={v.mevlit} />}
         <Bilgi etiket="Taziye" deger={v.taziyeAdresi} />
       </div>
 
-      <div className="mt-4 flex justify-center">
+      <div className="mt-8 flex justify-center">
         <WhatsAppPaylas text={`🖤 Vefat: ${v.adSoyad} (${v.yas})\n${v.yakinlik}\nCenaze: ${v.cenaze}`} url={`https://yanicak.org.tr/vefat/${v.id}`} />
       </div>
 

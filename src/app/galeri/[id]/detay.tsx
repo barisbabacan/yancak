@@ -34,7 +34,7 @@ function Icerik({ foto }: { foto: Foto }) {
 
   return (
     <div className="pb-4">
-      <div className="bg-koyu">
+      <div className="mx-4 overflow-hidden rounded-3xl bg-koyu shadow-lg shadow-toprak/20">
         {yt ? (
           <iframe
             className="aspect-video w-full"
@@ -49,9 +49,9 @@ function Icerik({ foto }: { foto: Foto }) {
         )}
       </div>
 
-      <div className="px-4 pt-4">
+      <div className="px-4 pt-6">
         <h1 className="font-serif text-2xl font-bold text-toprak">{foto.baslik}</h1>
-        <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[13px] text-toprak/65">
+        <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[13px] text-toprak/80">
           {foto.yil && (
             <span className="flex items-center gap-1">
               <CalendarDays className="size-3.5" /> {foto.yil}
@@ -70,7 +70,7 @@ function Icerik({ foto }: { foto: Foto }) {
       </div>
 
       {/* Fotoğraftaki kişiler */}
-      <section className="mx-4 mt-5 rounded-2xl bg-white p-4">
+      <section className="mx-4 mt-10 rounded-3xl bg-white p-5">
         <div className="mb-2 flex items-center gap-2">
           <UserSearch className="size-5 text-altin" />
           <h2 className="flex-1 font-semibold">Fotoğraftakiler</h2>
@@ -80,12 +80,12 @@ function Icerik({ foto }: { foto: Foto }) {
             </button>
           )}
         </div>
-        {kisiler.length === 0 && <p className="text-sm text-toprak/60">Henüz kimse eklenmedi. Fotoğraftakileri tanıyorsanız ekleyin!</p>}
+        {kisiler.length === 0 && <p className="text-sm text-toprak/80">Henüz kimse eklenmedi. Fotoğraftakileri tanıyorsanız ekleyin!</p>}
         <ul className="space-y-1.5">
           {kisiler.map((k, i) => (
             <li key={i} className={`flex justify-between gap-3 rounded-xl px-3 py-2 text-sm ${k.ad === "?" ? "bg-gunbatimi/10" : "bg-krem"}`}>
               <span className="font-semibold">{k.ad === "?" ? "❓ Tanıyan var mı?" : k.ad}</span>
-              <span className="text-right text-toprak/60">{k.konum}</span>
+              <span className="text-right text-toprak/80">{k.konum}</span>
             </li>
           ))}
         </ul>
@@ -110,15 +110,15 @@ function Icerik({ foto }: { foto: Foto }) {
       </section>
 
       {/* Yorumlar */}
-      <section className="mt-5 px-4">
+      <section className="mt-10 px-4">
         <h2 className="mb-2 font-semibold">Yorumlar & Hatıralar ({yorumlar.length})</h2>
-        <ul className="space-y-2">
+        <ul className="space-y-3">
           {yorumlar.map((y, i) => (
-            <li key={i} className="flex gap-3 rounded-2xl bg-white p-3">
+            <li key={i} className="flex gap-3 rounded-3xl bg-white p-3">
               <Avatar name={y.yazan} size="sm" />
               <div className="min-w-0">
                 <div className="text-sm font-semibold">
-                  {ad(y.yazan)} <span className="font-normal text-toprak/50">· {formatDate(y.tarih, { day: "numeric", month: "short" })}</span>
+                  {ad(y.yazan)} <span className="font-normal text-toprak/80">· {formatDate(y.tarih, { day: "numeric", month: "short" })}</span>
                 </div>
                 <p className="text-[15px] text-toprak/85">{y.mesaj}</p>
               </div>
@@ -145,7 +145,7 @@ function Icerik({ foto }: { foto: Foto }) {
             </button>
           </div>
         ) : (
-          <p className="mt-3 rounded-2xl bg-kum p-3 text-center text-sm">
+          <p className="mt-3 rounded-3xl bg-kum p-3 text-center text-sm">
             Yorum yazmak için <Link href="/giris" className="font-semibold text-altin">üye girişi</Link> yapın.
           </p>
         )}

@@ -14,7 +14,7 @@ export function GaleriIzgara({ fotolar, sepia }: { fotolar: Foto[]; sepia?: bool
 
   return (
     <>
-      <div className="no-scrollbar flex gap-2 overflow-x-auto px-4 py-2">
+      <div className="no-scrollbar flex gap-2 overflow-x-auto px-4 pt-1 pb-4">
         <Chip active={album === "hepsi"} onClick={() => setAlbum("hepsi")}>
           Tümü
         </Chip>
@@ -24,15 +24,15 @@ export function GaleriIzgara({ fotolar, sepia }: { fotolar: Foto[]; sepia?: bool
           </Chip>
         ))}
       </div>
-      <div className="grid grid-cols-2 gap-2 px-4 pt-1">
+      <div className="grid grid-cols-2 gap-3 px-4 pt-3 md:grid-cols-3 lg:grid-cols-4 lg:gap-5">
         {liste.map((f) => (
-          <Link key={f.id} href={`/galeri/${f.id}`} className="group relative overflow-hidden rounded-2xl bg-white">
+          <Link key={f.id} href={`/galeri/${f.id}`} className="group relative overflow-hidden rounded-3xl bg-white transition-transform hover:-translate-y-0.5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={f.src.replace("800/600", "500/500")} alt={f.baslik} className={`aspect-square w-full object-cover ${sepia ? "sepia-photo" : ""}`} />
             {f.youtube && <PlayCircle className="absolute top-2 right-2 size-8 text-white drop-shadow" />}
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-koyu/85 to-transparent p-2.5 pt-8 text-white">
               <div className="line-clamp-1 text-[13px] font-semibold">{f.baslik}</div>
-              <div className="flex gap-2 text-[11px] text-white/75">
+              <div className="flex gap-2 text-[12px] text-white/75">
                 {f.yil && <span>{f.yil}</span>}
                 {f.yorumlar.length > 0 && <span>💬 {f.yorumlar.length}</span>}
               </div>
@@ -59,13 +59,13 @@ export function YuklemeButonu({ arsiv }: { arsiv?: boolean }) {
           setAcik(true);
           setGonderildi(false);
         }}
-        className="fixed right-4 bottom-24 z-30 flex items-center gap-2 rounded-full bg-gunbatimi px-4 py-3 font-semibold text-white shadow-lg shadow-gunbatimi/40 md:right-[calc(50%-20rem)]"
+        className="fixed right-4 bottom-28 z-30 flex items-center gap-2 rounded-full bg-gunbatimi px-4 py-3 font-semibold text-white shadow-lg shadow-gunbatimi/40 lg:right-10 lg:bottom-10"
       >
         <ImagePlus className="size-5" /> Yükle
       </button>
       {acik && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center bg-koyu/50" onClick={() => setAcik(false)}>
-          <div className="pb-safe w-full max-w-md rounded-t-3xl bg-krem p-4 md:max-w-2xl" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-koyu/50 md:items-center md:p-6" onClick={() => setAcik(false)}>
+          <div className="pb-safe w-full max-w-md rounded-t-3xl bg-krem p-4 md:max-w-lg md:rounded-3xl md:p-6" onClick={(e) => e.stopPropagation()}>
             <div className="mb-3 flex items-center justify-between">
               <div className="font-serif text-lg font-bold text-toprak">{arsiv ? "Arşive ekle" : "Fotoğraf / video ekle"}</div>
               <button onClick={() => setAcik(false)} className="rounded-full bg-kum p-1.5" aria-label="Kapat">
@@ -76,7 +76,7 @@ export function YuklemeButonu({ arsiv }: { arsiv?: boolean }) {
               <div className="py-8 text-center">
                 <div className="text-4xl">✅</div>
                 <div className="mt-2 font-semibold">Yüklendi, teşekkürler!</div>
-                <p className="text-sm text-toprak/70">Paylaşımınız galeride yayında.</p>
+                <p className="text-sm text-toprak/85">Paylaşımınız galeride yayında.</p>
               </div>
             ) : (
               <form
@@ -94,7 +94,7 @@ export function YuklemeButonu({ arsiv }: { arsiv?: boolean }) {
                   ))}
                 </div>
                 {tur === "foto" ? (
-                  <label className="flex cursor-pointer flex-col items-center gap-1 rounded-2xl border-2 border-dashed border-bugday/60 bg-white py-6 text-sm text-toprak/70">
+                  <label className="flex cursor-pointer flex-col items-center gap-1 rounded-3xl border-2 border-dashed border-bugday/60 bg-white py-6 text-sm text-toprak/85">
                     <Upload className="size-7 text-altin" />
                     Fotoğraf seç veya çek
                     <input type="file" accept="image/*" multiple className="hidden" />

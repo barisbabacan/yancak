@@ -11,7 +11,7 @@ export default function KvkkSayfasi() {
       <div className="mx-4 mb-3 rounded-xl bg-gunbatimi/10 p-3 text-xs text-toprak/80">
         ⚠️ Taslak metindir. Yayına almadan önce bir hukukçuya kontrol ettirilmesi önerilir.
       </div>
-      <article className="mx-4 space-y-4 rounded-2xl bg-white p-5 text-[14.5px] leading-relaxed text-toprak/85 [&_h2]:font-semibold [&_h2]:text-toprak">
+      <article className="mx-4 mb-6 space-y-7 rounded-3xl bg-white p-5 text-[15.5px] leading-relaxed text-toprak/85 [&_h2]:mb-2 [&_h2]:text-[17px] [&_h2]:font-bold [&_h2]:text-toprak">
         <section>
           <h2>1. Veri Sorumlusu</h2>
           <p>

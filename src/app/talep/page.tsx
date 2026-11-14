@@ -21,7 +21,7 @@ export default function TalepSayfasi() {
           <div className="mx-4 rounded-3xl bg-white p-8 text-center">
             <div className="text-5xl">📨</div>
             <div className="mt-3 font-serif text-xl font-bold text-toprak">Mesajınız yönetime iletildi</div>
-            <p className="mt-1 text-sm text-toprak/70">
+            <p className="mt-1 text-sm text-toprak/85">
               {anonim ? "Mesajınız anonim olarak iletildi." : "Yönetimin cevabını aşağıdaki listeden takip edebilirsiniz."}
             </p>
             <button onClick={() => setGonderildi(false)} className="mt-4 rounded-full bg-kum px-5 py-2 text-sm font-semibold">
@@ -30,7 +30,7 @@ export default function TalepSayfasi() {
           </div>
         ) : (
           <form
-            className="mx-4 space-y-3 rounded-3xl bg-white p-4"
+            className="mx-4 space-y-5 rounded-3xl bg-white p-5"
             onSubmit={(e) => {
               e.preventDefault();
               setGonderildi(true);
@@ -51,20 +51,20 @@ export default function TalepSayfasi() {
                 <span className="flex items-center gap-1 font-semibold">
                   <EyeOff className="size-4" /> Anonim gönder
                 </span>
-                <span className="text-xs text-toprak/60">Yönetim adınızı görmez.</span>
+                <span className="text-xs text-toprak/80">Yönetim adınızı görmez.</span>
               </span>
             </label>
             <button className="w-full rounded-xl bg-toprak py-3 font-semibold text-krem">Gönder</button>
           </form>
         )}
 
-        <h2 className="mx-4 mt-6 mb-2 font-serif text-lg font-bold text-toprak">Gönderdiklerim</h2>
-        <ul className="space-y-2 px-4">
+        <h2 className="mx-4 mt-12 mb-4 font-serif text-[20px] font-bold text-toprak">Gönderdiklerim</h2>
+        <ul className="space-y-4 px-4">
           {TALEPLER.map((t) => (
-            <li key={t.id} className="rounded-2xl bg-white p-3.5">
+            <li key={t.id} className="rounded-3xl bg-white p-3.5">
               <div className="flex items-center gap-2 text-xs">
                 <span className="rounded-full bg-kum px-2 py-0.5 font-semibold">{t.tur}</span>
-                {t.anonim && <span className="text-toprak/50">Anonim</span>}
+                {t.anonim && <span className="text-toprak/80">Anonim</span>}
                 <span className={`ml-auto rounded-full px-2 py-0.5 font-semibold ${t.durum === "Yeni" ? "bg-amber-100 text-amber-800" : "bg-emerald-100 text-emerald-800"}`}>{t.durum}</span>
               </div>
               <div className="mt-1.5 font-semibold">{t.konu}</div>
@@ -75,7 +75,7 @@ export default function TalepSayfasi() {
                   {t.cevap}
                 </div>
               )}
-              <div className="mt-1 text-[11px] text-toprak/45">{formatDate(t.tarih)}</div>
+              <div className="mt-1 text-[12px] text-toprak/80">{formatDate(t.tarih)}</div>
             </li>
           ))}
         </ul>

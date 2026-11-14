@@ -19,21 +19,21 @@ export default function UyelerSayfasi() {
       <UyeKapisi>
         <div className="px-4 pb-3">
           <label className="flex items-center gap-2 rounded-full border border-toprak/15 bg-white px-4 py-2.5">
-            <Search className="size-4 text-toprak/50" />
+            <Search className="size-4 text-toprak/80" />
             <input value={ara} onChange={(e) => setAra(e.target.value)} placeholder="İsim, meslek veya sülale ara…" className="flex-1 bg-transparent text-[15px] outline-none" />
           </label>
         </div>
-        <ul className="mx-4 divide-y divide-kum overflow-hidden rounded-2xl bg-white">
+        <ul className="mx-4 divide-y divide-kum overflow-hidden rounded-3xl bg-white">
           {liste.map((u) => (
             <li key={u.id} className="flex items-center gap-3 p-3">
               <Avatar name={u.adSoyad} size="sm" dark={u.yetkiler.length > 0} />
               <div className="min-w-0 flex-1">
                 <div className="font-medium">{u.adSoyad}</div>
-                <div className="truncate text-xs text-toprak/60">
+                <div className="truncate text-xs text-toprak/80">
                   {u.meslek} · {u.sulale}
                 </div>
               </div>
-              <div className="text-right text-[11px] text-toprak/50">
+              <div className="text-right text-[12px] text-toprak/80">
                 Üye
                 <br />
                 {formatDate(u.kayitTarihi, { year: "numeric" })}
@@ -41,7 +41,7 @@ export default function UyelerSayfasi() {
             </li>
           ))}
         </ul>
-        {rol !== "yonetici" && <p className="mx-4 mt-3 text-center text-xs text-toprak/50">Telefon ve adres bilgileri gizlilik gereği yalnızca yönetim tarafından görülür.</p>}
+        {rol !== "yonetici" && <p className="mx-4 mt-3 text-center text-xs text-toprak/80">Telefon ve adres bilgileri gizlilik gereği yalnızca yönetim tarafından görülür.</p>}
       </UyeKapisi>
     </>
   );

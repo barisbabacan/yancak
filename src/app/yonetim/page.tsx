@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Eye, Trash2, UserPlus, Megaphone, Wallet, HeartCrack, ShieldCheck, MessageSquareText } from "lucide-react";
-import { DUYURU_KATEGORILERI, TALEPLER, UYELER, formatDate, sonYuklenenler } from "@/lib/data";
+import { DUYURU_KATEGORILERI, KASA_TURLERI, TALEPLER, UYELER, formatDate, sonYuklenenler, type KasaTur } from "@/lib/data";
 import { Chip, PageHeader } from "@/components/ui";
 import { Alan } from "@/components/galeri";
 import { useAuth } from "@/components/auth";
@@ -27,22 +27,22 @@ export default function YonetimSayfasi() {
     return (
       <div className="px-4 pt-10 text-center">
         <ShieldCheck className="mx-auto size-12 text-toprak/40" />
-        <p className="mt-3 text-toprak/70">Bu sayfa yalnızca yetkili yöneticiler içindir.</p>
-        <p className="mt-1 text-xs text-toprak/50">(Prototip: üstteki şeritten &ldquo;Yönetici&rdquo;yi seçin.)</p>
+        <p className="mt-3 text-toprak/85">Bu sayfa yalnızca yetkili yöneticiler içindir.</p>
+        <p className="mt-1 text-xs text-toprak/80">(Prototip: üstteki şeritten &ldquo;Yönetici&rdquo;yi seçin.)</p>
       </div>
     );
 
   return (
     <>
       <PageHeader title="Yönetim Paneli" subtitle="Telefondan hızlıca içerik yönetin" />
-      <div className="no-scrollbar sticky top-[61px] z-20 flex gap-2 overflow-x-auto bg-krem/95 px-4 py-2 backdrop-blur">
+      <div className="no-scrollbar sticky top-[82px] z-20 flex gap-2 overflow-x-auto bg-krem/95 px-4 py-3 backdrop-blur">
         {SEKMELER.map((s) => (
           <Chip key={s.id} active={sekme === s.id} onClick={() => setSekme(s.id)}>
             {s.ad}
           </Chip>
         ))}
       </div>
-      <div className="px-4 pt-2">
+      <div className="px-4 pt-5">
         {sekme === "ozet" && <Ozet git={setSekme} />}
         {sekme === "uye" && <UyeEkle />}
         {sekme === "duyuru" && <DuyuruEkle />}
@@ -58,7 +58,7 @@ function Ozet({ git }: { git: (s: Sekme) => void }) {
   const yeniTalep = TALEPLER.filter((t) => t.durum === "Yeni");
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-8 pb-6">
       <div className="grid grid-cols-4 gap-2">
         {[
           { ad: "Üye Ekle", icon: UserPlus, s: "uye" as Sekme },
@@ -66,7 +66,7 @@ function Ozet({ git }: { git: (s: Sekme) => void }) {
           { ad: "Kasa", icon: Wallet, s: "kasa" as Sekme },
           { ad: "Vefat", icon: HeartCrack, s: "duyuru" as Sekme },
         ].map(({ ad, icon: Icon, s }) => (
-          <button key={ad} onClick={() => git(s)} className="flex flex-col items-center gap-1.5 rounded-2xl bg-white py-3 text-xs font-medium">
+          <button key={ad} onClick={() => git(s)} className="flex flex-col items-center gap-1.5 rounded-3xl bg-white py-3 text-xs font-medium">
             <span className="flex size-10 items-center justify-center rounded-xl bg-toprak text-krem">
               <Icon className="size-5" />
             </span>
@@ -75,20 +75,20 @@ function Ozet({ git }: { git: (s: Sekme) => void }) {
         ))}
       </div>
 
-      <section className="rounded-2xl bg-white p-4">
+      <section className="rounded-3xl bg-white p-4">
         <div className="mb-1 flex items-center justify-between">
           <h2 className="font-semibold">Son yüklenen görseller</h2>
-          <span className="rounded-full bg-gunbatimi px-2 py-0.5 text-[11px] font-bold text-white">{yuklenenler.length} yeni</span>
+          <span className="rounded-full bg-gunbatimi px-2 py-0.5 text-[12px] font-bold text-white">{yuklenenler.length} yeni</span>
         </div>
-        <p className="mb-3 text-xs text-toprak/60">Üye yüklemeleri onaysız yayına girer. Uygunsuz olanları buradan kaldırabilirsiniz.</p>
+        <p className="mb-3 text-xs text-toprak/80">Üye yüklemeleri onaysız yayına girer. Uygunsuz olanları buradan kaldırabilirsiniz.</p>
         <ul className="space-y-2">
           {yuklenenler.map((f) => (
             <li key={f.id} className="flex items-center gap-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={f.src.replace("800/600", "200/200")} alt="" className={`size-14 rounded-xl object-cover ${f.arsiv ? "sepia-photo" : ""}`} />
+              <img src={f.src.replace("800/600", "200/200")} alt="" className={`size-14 rounded-2xl object-cover ${f.arsiv ? "sepia-photo" : ""}`} />
               <div className="min-w-0 flex-1">
                 <div className="truncate text-sm font-medium">{f.baslik}</div>
-                <div className="text-xs text-toprak/55">
+                <div className="text-xs text-toprak/80">
                   {f.yukleyen} · {f.arsiv ? "Arşiv" : "Galeri"}
                 </div>
               </div>
@@ -104,15 +104,15 @@ function Ozet({ git }: { git: (s: Sekme) => void }) {
         </ul>
       </section>
 
-      <section className="rounded-2xl bg-white p-4">
+      <section className="rounded-3xl bg-white p-4">
         <div className="mb-2 flex items-center gap-2">
           <MessageSquareText className="size-5 text-altin" />
           <h2 className="flex-1 font-semibold">Yeni dilek / şikayetler</h2>
-          <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-bold text-amber-800">{yeniTalep.length}</span>
+          <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[12px] font-bold text-amber-800">{yeniTalep.length}</span>
         </div>
         {yeniTalep.map((t) => (
           <div key={t.id} className="rounded-xl bg-krem p-3">
-            <div className="text-xs text-toprak/55">
+            <div className="text-xs text-toprak/80">
               {t.tur} · {t.anonim ? "Anonim" : t.yazan} · {formatDate(t.tarih, { day: "numeric", month: "short" })}
             </div>
             <div className="font-medium">{t.konu}</div>
@@ -143,7 +143,7 @@ function UyeEkle() {
   if (ok) return <Basarili mesaj="Üye kaydedildi. Giriş bilgileri SMS ile gönderildi." sifirla={() => setOk(false)} />;
   return (
     <form
-      className="space-y-3 rounded-3xl bg-white p-4"
+      className="space-y-5 rounded-3xl bg-white p-5"
       onSubmit={(e) => {
         e.preventDefault();
         setOk(true);
@@ -183,7 +183,7 @@ function DuyuruEkle() {
   if (ok) return <Basarili mesaj="Duyuru yayınlandı, üyelere bildirim gönderildi." sifirla={() => setOk(false)} />;
   return (
     <form
-      className="space-y-3 rounded-3xl bg-white p-4"
+      className="space-y-5 rounded-3xl bg-white p-5"
       onSubmit={(e) => {
         e.preventDefault();
         setOk(true);
@@ -227,44 +227,58 @@ function DuyuruEkle() {
 
 function KasaKaydi() {
   const [ok, setOk] = useState(false);
-  const [tur, setTur] = useState<"gelir" | "gider">("gelir");
-  const [kategori, setKategori] = useState("Bağış");
-  if (ok) return <Basarili mesaj="Kasa kaydı eklendi." sifirla={() => setOk(false)} />;
+  const [tur, setTur] = useState<KasaTur>("aidat");
+  if (ok) return <Basarili mesaj="Kayıt hesap defterine eklendi." sifirla={() => setOk(false)} />;
   return (
     <form
-      className="space-y-3 rounded-3xl bg-white p-4"
+      className="space-y-5 rounded-3xl bg-white p-5"
       onSubmit={(e) => {
         e.preventDefault();
         setOk(true);
       }}
     >
-      <div className="grid grid-cols-2 gap-1 rounded-xl bg-kum p-1 text-sm">
-        {(["gelir", "gider"] as const).map((t) => (
-          <button type="button" key={t} onClick={() => setTur(t)} className={`rounded-lg py-2 ${tur === t ? (t === "gelir" ? "bg-emerald-600 font-semibold text-white" : "bg-orange-600 font-semibold text-white") : ""}`}>
-            {t === "gelir" ? "Gelir" : "Gider"}
-          </button>
-        ))}
-      </div>
-      <div className="flex flex-wrap gap-1.5">
-        {(tur === "gelir" ? ["Bağış", "Aidat", "Kermes", "Diğer"] : ["Kira", "Fatura", "Onarım", "Yardım", "Etkinlik", "Diğer"]).map((k) => (
-          <Chip key={k} active={kategori === k} onClick={() => setKategori(k)}>
-            {k}
-          </Chip>
-        ))}
+      <div>
+        <div className="mb-1.5 text-sm font-medium">Kayıt türü</div>
+        <div className="grid grid-cols-2 gap-2">
+          {KASA_TURLERI.map((t) => (
+            <button
+              type="button"
+              key={t.id}
+              onClick={() => setTur(t.id)}
+              className={`rounded-xl px-3 py-2.5 text-[15px] font-semibold ring-2 ${tur === t.id ? `${t.zemin} ${t.renk} ring-current` : "bg-krem text-toprak ring-transparent"}`}
+            >
+              {t.id === "harcama" ? "− " : "+ "}
+              {t.ad}
+            </button>
+          ))}
+        </div>
       </div>
       <Alan etiket="Tutar (₺)" type="number" placeholder="0" />
-      <Alan etiket="Açıklama" placeholder="Ör. Kasım aidatları" />
-      <Alan etiket="Tarih" type="date" defaultValue={new Date().toISOString().slice(0, 10)} />
-      {tur === "gelir" && kategori === "Bağış" && (
-        <>
-          <Alan etiket="Bağışçı" placeholder="Ad Soyad" />
-          <label className="flex items-center gap-2 rounded-xl bg-krem p-3 text-sm">
-            <input type="checkbox" className="size-4 accent-toprak" /> İsmi görünmesin (anonim)
-          </label>
-        </>
+      <Alan etiket="Açıklama" placeholder={tur === "harcama" ? "Ör. Dernek merkezi kirası" : tur === "aidat" ? "Ör. Kasım 2026 aidatı" : tur === "bagis" ? "Ör. Cami onarımı bağışı" : "Ör. Kermes geliri"} />
+      <div className="grid grid-cols-2 gap-2">
+        <Alan etiket="Tarih" type="date" defaultValue={new Date().toISOString().slice(0, 10)} />
+        <Alan etiket="Belge no" placeholder={tur === "harcama" ? "F-0000" : "M-0000"} />
+      </div>
+      {tur === "aidat" && (
+        <label className="block text-sm font-medium text-toprak">
+          Ödeyen üye
+          <select required defaultValue="" className="mt-1 w-full rounded-xl border border-toprak/15 bg-white px-3 py-2.5 text-[15px] outline-none focus:border-bugday">
+            <option value="" disabled>Üye seçin</option>
+            {UYELER.map((u) => (
+              <option key={u.id}>{u.adSoyad}</option>
+            ))}
+          </select>
+        </label>
+      )}
+      {tur === "aidat" && <p className="-mt-3 text-[13px] text-toprak/80">Her üyenin aidatı ayrı kaydedilir; defterde ödeme tarihi ve adıyla görünür.</p>}
+      {tur === "bagis" && <Alan etiket="Bağışçı" placeholder="Ad Soyad" />}
+      {tur === "bagis" && (
+        <label className="flex items-center gap-2 rounded-xl bg-krem p-3 text-sm">
+          <input type="checkbox" className="size-4 accent-toprak" /> İsmi görünmesin (anonim)
+        </label>
       )}
       <Alan etiket="Dekont / fiş fotoğrafı" type="file" />
-      <button className="w-full rounded-xl bg-toprak py-3 font-semibold text-krem">Kaydet</button>
+      <button className="w-full rounded-xl bg-toprak py-3 font-semibold text-krem">Deftere Kaydet</button>
     </form>
   );
 }
@@ -272,20 +286,20 @@ function KasaKaydi() {
 function Yetkiler() {
   return (
     <div className="space-y-2">
-      <p className="text-sm text-toprak/70">Üyelere site yönetimi için ayrı yetkiler verebilirsiniz.</p>
+      <p className="text-sm text-toprak/85">Üyelere site yönetimi için ayrı yetkiler verebilirsiniz.</p>
       {UYELER.filter((u) => u.yetkiler.length).map((u) => (
-        <div key={u.id} className="rounded-2xl bg-white p-3.5">
+        <div key={u.id} className="rounded-3xl bg-white p-3.5">
           <div className="font-medium">{u.adSoyad}</div>
           <div className="mt-2 flex flex-wrap gap-1.5">
             {Object.entries(YETKI_ADLARI).map(([id, ad]) => (
-              <span key={id} className={`rounded-full px-2.5 py-1 text-xs ${u.yetkiler.includes(id) || u.yetkiler.includes("tam") ? "bg-toprak text-krem" : "bg-kum text-toprak/60"}`}>
+              <span key={id} className={`rounded-full px-2.5 py-1 text-xs ${u.yetkiler.includes(id) || u.yetkiler.includes("tam") ? "bg-toprak text-krem" : "bg-kum text-toprak/80"}`}>
                 {ad}
               </span>
             ))}
           </div>
         </div>
       ))}
-      <button className="w-full rounded-2xl border-2 border-dashed border-bugday py-3 text-sm font-semibold">+ Üyeye yetki ver</button>
+      <button className="w-full rounded-3xl border-2 border-dashed border-bugday py-3 text-sm font-semibold">+ Üyeye yetki ver</button>
     </div>
   );
 }

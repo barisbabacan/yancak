@@ -138,12 +138,12 @@ export const RESMI_BELGELER = [
 
 // ---------------- DUYURULAR ----------------
 export const DUYURU_KATEGORILERI = [
-  { id: "vefat", ad: "Vefat", renk: "bg-stone-800 text-white" },
-  { id: "sehit", ad: "Şehit", renk: "bg-red-700 text-white" },
-  { id: "dernek", ad: "Dernek", renk: "bg-amber-700 text-white" },
-  { id: "etkinlik", ad: "Etkinlik", renk: "bg-emerald-700 text-white" },
-  { id: "gundem", ad: "Ülke Gündemi", renk: "bg-sky-700 text-white" },
-  { id: "koy", ad: "Köyden", renk: "bg-orange-600 text-white" },
+  { id: "vefat", ad: "Vefat", renk: "bg-stone-900 text-white", yazi: "text-stone-900" },
+  { id: "sehit", ad: "Şehit", renk: "bg-red-800 text-white", yazi: "text-red-800" },
+  { id: "dernek", ad: "Dernek", renk: "bg-amber-800 text-white", yazi: "text-amber-800" },
+  { id: "etkinlik", ad: "Etkinlik", renk: "bg-emerald-800 text-white", yazi: "text-emerald-800" },
+  { id: "gundem", ad: "Ülke Gündemi", renk: "bg-sky-800 text-white", yazi: "text-sky-800" },
+  { id: "koy", ad: "Köyden", renk: "bg-orange-800 text-white", yazi: "text-orange-800" },
 ] as const;
 export type DuyuruKategori = (typeof DUYURU_KATEGORILERI)[number]["id"];
 
@@ -355,27 +355,54 @@ export const SULALELER: { id: string; ad: string; lakap: string; aciklama: strin
   { id: "demirtaslar", ad: "Demirtaşlar", lakap: "Taşçılar", aciklama: "Köy evlerinin taş ustaları.", agac: { ad: "Taşçı Ali", not: "~1875", cocuklar: [{ ad: "Mustafa Demirtaş", not: "1955", cocuklar: [{ ad: "Ayşe Demirtaş", not: "1985" }] }] } },
 ];
 
-// ---------------- KASA ----------------
-export type KasaHareket = { id: string; tarih: string; tur: "gelir" | "gider"; kategori: string; aciklama: string; tutar: number };
-export const KASA: KasaHareket[] = [
-  { id: "k1", tarih: daysFromToday(-1), tur: "gelir", kategori: "Bağış", aciklama: "Cami onarımı bağışı", tutar: 5000 },
-  { id: "k2", tarih: daysFromToday(-3), tur: "gelir", kategori: "Aidat", aciklama: "Kasım aidatları (42 üye)", tutar: 8400 },
-  { id: "k3", tarih: daysFromToday(-5), tur: "gider", kategori: "Kira", aciklama: "Dernek merkezi kirası", tutar: 12000 },
-  { id: "k4", tarih: daysFromToday(-6), tur: "gider", kategori: "Fatura", aciklama: "Elektrik + su + doğalgaz", tutar: 2350 },
-  { id: "k5", tarih: daysFromToday(-9), tur: "gider", kategori: "Onarım", aciklama: "Cami çatısı — son ödeme", tutar: 18500 },
-  { id: "k6", tarih: daysFromToday(-14), tur: "gelir", kategori: "Kermes", aciklama: "Kadın kolu kermes geliri", tutar: 14200 },
-  { id: "k7", tarih: daysFromToday(-20), tur: "gider", kategori: "Yardım", aciklama: "İhtiyaç sahibi aileye erzak", tutar: 4000 },
-  { id: "k8", tarih: daysFromToday(-25), tur: "gelir", kategori: "Bağış", aciklama: "Pilav günü bağışları", tutar: 22000 },
-];
-export const KASA_BAKIYE = 86450;
+// ---------------- KASA (hesap defteri) ----------------
+export const KASA_TURLERI = [
+  { id: "harcama", ad: "Harcama", renk: "text-[#a8321c]", zemin: "bg-[#fbe9e3]" },
+  { id: "aidat", ad: "Aidat", renk: "text-[#1f5f8b]", zemin: "bg-[#e3eef7]" },
+  { id: "bagis", ad: "Bağış", renk: "text-[#1e6b3f]", zemin: "bg-[#e2f2e8]" },
+  { id: "ekgelir", ad: "Ek Gelir", renk: "text-[#7a4f0e]", zemin: "bg-[#f6ecd6]" },
+] as const;
+export type KasaTur = (typeof KASA_TURLERI)[number]["id"];
 
-export const BAGISLAR = [
-  { ad: "Mehmet Yıldırım", tutar: 5000, tarih: daysFromToday(-1), amac: "Cami onarımı", anonim: false },
-  { ad: "—", tutar: 10000, tarih: daysFromToday(-12), amac: "Genel", anonim: true },
-  { ad: "Osman Aslan", tutar: 3000, tarih: daysFromToday(-20), amac: "Pilav günü", anonim: false },
-  { ad: "Hüseyin Karaca", tutar: 2500, tarih: daysFromToday(-22), amac: "Pilav günü", anonim: false },
-  { ad: "—", tutar: 1500, tarih: daysFromToday(-30), amac: "Yardım", anonim: true },
+export type KasaHareket = {
+  id: string;
+  tarih: string;
+  tur: KasaTur;
+  aciklama: string;
+  kisi?: string; // bağışçı; aidatta zorunlu (ödeyen üye)
+  anonim?: boolean; // "ismim görünmesin"
+  tutar: number;
+  belgeNo?: string;
+};
+
+export const KASA: KasaHareket[] = [
+  { id: "k1", tarih: daysFromToday(-1), tur: "bagis", aciklama: "Cami onarımı bağışı", kisi: "Mehmet Yıldırım", tutar: 5000, belgeNo: "M-0412" },
+  { id: "k2", tarih: daysFromToday(-1), tur: "aidat", aciklama: "Kasım aidatı", kisi: "Zeynep Yıldırım", tutar: 200, belgeNo: "M-0411" },
+  { id: "k3a", tarih: daysFromToday(-3), tur: "aidat", aciklama: "Kasım aidatı", kisi: "Hüseyin Karaca", tutar: 200, belgeNo: "M-0410" },
+  { id: "k3b", tarih: daysFromToday(-3), tur: "aidat", aciklama: "Kasım aidatı", kisi: "Fatma Karaca", tutar: 200, belgeNo: "M-0409" },
+  { id: "k3c", tarih: daysFromToday(-4), tur: "aidat", aciklama: "Kasım aidatı", kisi: "Emre Aslan", tutar: 200, belgeNo: "M-0408" },
+  { id: "k3d", tarih: daysFromToday(-7), tur: "aidat", aciklama: "Kasım aidatı", kisi: "Mustafa Demirtaş", tutar: 200, belgeNo: "M-0407" },
+  { id: "k3e", tarih: daysFromToday(-8), tur: "aidat", aciklama: "Kasım ve Aralık aidatı", kisi: "Osman Aslan", tutar: 400, belgeNo: "M-0406" },
+  { id: "k4", tarih: daysFromToday(-3), tur: "harcama", aciklama: "Kırtasiye ve çay-şeker", tutar: 640, belgeNo: "F-2291" },
+  { id: "k5", tarih: daysFromToday(-5), tur: "harcama", aciklama: "Dernek merkezi kirası (Kasım)", tutar: 12000, belgeNo: "D-118" },
+  { id: "k6", tarih: daysFromToday(-6), tur: "harcama", aciklama: "Elektrik + su + doğalgaz faturaları", tutar: 2350, belgeNo: "F-2287" },
+  { id: "k7", tarih: daysFromToday(-9), tur: "harcama", aciklama: "Cami çatısı onarımı — son ödeme", tutar: 18500, belgeNo: "F-2280" },
+  { id: "k8", tarih: daysFromToday(-12), tur: "bagis", aciklama: "Genel bağış", anonim: true, tutar: 10000, belgeNo: "M-0405" },
+  { id: "k9", tarih: daysFromToday(-14), tur: "ekgelir", aciklama: "Kadın kolu kermes geliri", tutar: 14200, belgeNo: "M-0403" },
+  { id: "k10", tarih: daysFromToday(-14), tur: "harcama", aciklama: "Kermes malzeme alımı", tutar: 2100, belgeNo: "F-2271" },
+  { id: "k11", tarih: daysFromToday(-20), tur: "harcama", aciklama: "İhtiyaç sahibi aileye erzak yardımı", tutar: 4000, belgeNo: "F-2265" },
+  { id: "k12", tarih: daysFromToday(-20), tur: "bagis", aciklama: "Pilav günü bağışı", kisi: "Osman Aslan", tutar: 3000, belgeNo: "M-0398" },
+  { id: "k13", tarih: daysFromToday(-22), tur: "bagis", aciklama: "Pilav günü bağışı", kisi: "Hüseyin Karaca", tutar: 2500, belgeNo: "M-0396" },
+  { id: "k14", tarih: daysFromToday(-25), tur: "ekgelir", aciklama: "Pilav günü toplanan bağış kutusu", tutar: 16500, belgeNo: "M-0394" },
+  { id: "k15", tarih: daysFromToday(-28), tur: "harcama", aciklama: "Pilav günü pirinç, et ve kazan kirası", tutar: 21800, belgeNo: "F-2252" },
+  { id: "k16", tarih: daysFromToday(-30), tur: "bagis", aciklama: "Yardım fonu bağışı", anonim: true, tutar: 1500, belgeNo: "M-0390" },
+  { id: "k17a", tarih: daysFromToday(-31), tur: "aidat", aciklama: "Ekim aidatı", kisi: "Ali Osman Kılıç", tutar: 200, belgeNo: "M-0389" },
+  { id: "k17b", tarih: daysFromToday(-32), tur: "aidat", aciklama: "Ekim aidatı", kisi: "Hatice Kılıç", tutar: 200, belgeNo: "M-0388" },
+  { id: "k17c", tarih: daysFromToday(-33), tur: "aidat", aciklama: "Ekim aidatı", kisi: "Ayşe Demirtaş", tutar: 200, belgeNo: "M-0387" },
+  { id: "k17d", tarih: daysFromToday(-33), tur: "aidat", aciklama: "Ekim aidatı", kisi: "Mehmet Yıldırım", tutar: 200, belgeNo: "M-0386" },
 ];
+/** Kasadaki güncel tutar (en son hareketten sonraki bakiye) */
+export const KASA_BAKIYE = 86450;
 
 // ---------------- ESNAF ----------------
 export const ESNAF = [
