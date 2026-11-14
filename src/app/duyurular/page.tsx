@@ -1,0 +1,45 @@
+"use client";
+
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { DUYURULAR, DUYURU_KATEGORILERI, type DuyuruKategori } from "@/lib/data";
+import { DuyuruSatir } from "@/components/duyuru";
+import { Chip, PageHeader } from "@/components/ui";
+
+function Liste() {
+  const params = useSearchParams();
+  const [kat, setKat] = useState<DuyuruKategori | "hepsi">((params.get("k") as DuyuruKategori) || "hepsi");
+  const liste = DUYURULAR.filter((d) => kat === "hepsi" || d.kategori === kat);
+
+  return (
+    <>
+      <div className="no-scrollbar sticky top-[61px] z-20 flex gap-2 overflow-x-auto bg-krem/95 px-4 py-2 backdrop-blur">
+        <Chip active={kat === "hepsi"} onClick={() => setKat("hepsi")}>
+          Tümü
+        </Chip>
+        {DUYURU_KATEGORILERI.map((k) => (
+          <Chip key={k.id} active={kat === k.id} onClick={() => setKat(k.id)}>
+            {k.ad}
+          </Chip>
+        ))}
+      </div>
+      <div className="space-y-2.5 px-4 pt-2">
+        {liste.map((d) => (
+          <DuyuruSatir key={d.id} d={d} />
+        ))}
+        {!liste.length && <p className="py-10 text-center text-sm text-toprak/60">Bu kategoride duyuru yok.</p>}
+      </div>
+    </>
+  );
+}
+
+export default function DuyurularSayfasi() {
+  return (
+    <>
+      <PageHeader title="Duyurular" subtitle="Köyümüzden ve derneğimizden son gelişmeler" />
+      <Suspense>
+        <Liste />
+      </Suspense>
+    </>
+  );
+}

@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Yanıcak Köyü Kültür ve Dayanışma Derneği — Web Sitesi
 
-## Getting Started
+Mobil öncelikli dernek sitesi. **Şu an prototip aşamasında:** veriler `src/lib/data.ts` içindeki örnek verilerdir, formlar kayıt yapmaz.
 
-First, run the development server:
+## Çalıştırma
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev -- -p 3107
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Sayfanın en üstündeki şeritten **Ziyaretçi / Üye / Yönetici** seçerek siteye farklı gözlerle bakabilirsiniz. Demo "Üye" hesabının bugün doğum günü olduğu için kişisel doğum günü kartı açılır.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Sayfalar
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Herkese açık | Üyelere özel | Yönetici |
+|---|---|---|
+| Ana sayfa (doğum günü kartı, öne çıkan duyuru, vefat bandı, etkinlikler) | Eski fotoğraf & video arşivi | Yönetim paneli: son yüklenen görseller, talepler |
+| Duyurular (kategori filtresi, WhatsApp paylaş) | Fotoğraf yorumları, fotoğraftaki kişiler | Üye ekleme formu |
+| Vefat & taziye | Taziye mesajı bırakma | Duyuru / vefat ekleme |
+| Köyümüz: tarihçe, kurucular, Osmanlı belgeleri | Sülaleler & soy ağacı | Kasa kaydı (anonim bağış seçeneği) |
+| Fotoğraf galerisi | Kasa, gelir-gider, bağışçılar, IBAN | Yetkiler |
+| Dernek: iletişim, yönetim kurulu, kadın kolu, belgeler | Esnaflar, ilan panosu, üye listesi | |
+| KVKK aydınlatma metni (taslak) | Dilek-istek-şikayet (anonim seçenek), profil | |
 
-## Learn More
+Herkese açık sayfalarda kişi isimleri `Ahmet Yı.` şeklinde gösterilir.
 
-To learn more about Next.js, take a look at the following resources:
+## Gerçek sürüm için yapılacaklar
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- MongoDB modelleri ve API (üyeler, duyurular, fotoğraflar, kasa, talepler…)
+- Gerçek oturum açma (telefon/e-posta + şifre), rol ve yetki kontrolü sunucu tarafında
+- Fotoğraf yükleme için dosya depolama (ör. S3 uyumlu depolama / Cloudinary)
+- Yeni duyuru push bildirimleri (`public/sw.js` içinde iskeleti var)
+- KVKK metninin hukukçuya kontrol ettirilmesi
+- Örnek görsellerin (`public/ornek/`) gerçek fotoğraflarla değiştirilmesi
