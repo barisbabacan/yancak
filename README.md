@@ -9,6 +9,10 @@ npm install
 npm run dev -- -p 3107
 ```
 
+## Yayın (Railway)
+
+`main` dalına yapılan her push Railway'de otomatik olarak derlenip yayınlanır (`npm run build` → `npm start`).
+
 Sayfanın en üstündeki şeritten **Ziyaretçi / Üye / Yönetici** seçerek siteye farklı gözlerle bakabilirsiniz. Demo "Üye" hesabının bugün doğum günü olduğu için kişisel doğum günü kartı açılır.
 
 ## Sayfalar
